@@ -1,0 +1,22 @@
+version: '2.3'
+services:
+  python_dev_env:
+    build: ./build
+    image: taki_cuda
+    container_name: taki_docker
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=all
+    ports:
+      - "61022:22"
+      - "61888:8888"
+      - "61006:6006"
+    volumes:
+        - /mnt/qnap2:/home/
+        - /mnt/gpu-node:/dataset/
+    restart: always
+    hostname: "taki_d"
+    shm_size: '30gb'
+    dns: 133.66.1.13
+
